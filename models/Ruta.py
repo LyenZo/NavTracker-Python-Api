@@ -10,6 +10,19 @@ class Ruta(db.Model):
     f_inicio = db.Column(db.DateTime, nullable=False)
     f_final = db.Column(db.DateTime, nullable=False)
     distancia = db.Column(db.Numeric(9, 6), nullable=False)
+    
+    def __init__(self,id_conductor,id_pasajero,lat_inicio,lat_final,lon_inicio,lon_final,f_inicio,f_final,distancia):
+        self.id_conductor = id_conductor
+        self.id_pasajero = id_pasajero
+        self.lat_inicio = lat_inicio
+        self.lat_final = lat_final
+        self.lon_inicio = lon_final
+        self.lon_final = lon_final
+        self.f_inicio = f_inicio
+        self.f_final = f_final
+        self.distancia = distancia
+        
+        
 
     def to_dict(self):
         return {

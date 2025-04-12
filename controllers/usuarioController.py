@@ -2,6 +2,7 @@ from models.Usuario import Usuario
 from flask import jsonify
 from config import db
 from flask_jwt_extended import create_access_token  
+from flask_jwt_extended import get_jwt_identity
 
 #----------------------------------------------------------------------------------------------------------------
 #GET ALL
@@ -76,3 +77,15 @@ def login_usuario(email, password):
                 }
         })
     return jsonify({"msg":"Credenciales invalidas"}),401
+#----------------------------------------------------------------------------------------------------------------
+#PERFIL
+def get_perfil_usuario():
+    try:
+        id_u = get_jwt_identity()
+        usuario = Usuario.query.get(id_u)
+        if not usuario:
+            return {"error": "Usuario no encontrado"}, 404
+        return usuario.to_dict(), 200
+    except Exception as e:
+        print(f"ERROR: {e}")
+        return {"error": "Error al obtener el perfil"}, 500
