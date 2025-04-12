@@ -14,7 +14,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # Permitir CORS
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": ["https://editor.swagger.io"]}})
 
 # Configuración del JWT
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'qwertyuiop')  # Usa variable de entorno como fallback
